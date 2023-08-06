@@ -110,7 +110,7 @@ fn main() -> Result<()> {
                 if !mod_path.is_dir() {
                     create_dir(&mod_path)?;
                 }
-                fs_extra::copy_items(&[steam_path], mod_path, &CopyOptions::new())?;
+                fs_extra::copy_items(&[steam_path], &args.mods_dir, &CopyOptions::new())?;
                 continue;
             }
         }
@@ -145,11 +145,7 @@ fn main() -> Result<()> {
 
         println!("Downloaded {} ({})", rimmod.name, rimmod.id);
 
-        if !mod_path.is_dir() {
-            create_dir(&mod_path)?;
-        }
-
-        fs_extra::copy_items(&[steam_path], mod_path, &CopyOptions::new())?;
+        fs_extra::copy_items(&[steam_path], &args.mods_dir, &CopyOptions::new())?;
     }
 
     println!("All mods checked out. Bye!");
